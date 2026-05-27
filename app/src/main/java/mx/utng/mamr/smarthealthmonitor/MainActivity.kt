@@ -36,32 +36,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material3.Surface
 import android.util.Log
+import mx.utng.mamr.smarthealthmonitor.navigation.SmartHealthNavGraph
 import mx.utng.mamr.smarthealthmonitor.ui.theme.SmartHealthMonitorTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
-            SmartHealthMonitorTheme(
-                darkTheme = true,
-                dynamicColor = false
-            ) {
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    LoginScreen(
-                        onLoginSuccess = {
-                            Log.d("SmartHealth", "Login exitoso")
-                        }
-                    )
-                }
-            }
+            // NavGraph es ahora el punto de entrada — no LoginScreen directamente
+            SmartHealthNavGraph()
         }
     }
 }
 
-@Composable
+
+    @Composable
 fun SmartHealthScreen(
     isLandscape: Boolean,
     nombre: String = "Juan García",
