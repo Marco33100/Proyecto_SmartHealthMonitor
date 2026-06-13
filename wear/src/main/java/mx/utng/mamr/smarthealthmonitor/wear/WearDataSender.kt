@@ -1,3 +1,5 @@
+package mx.utng.mamr.smarthealthmonitor.wear
+
 import android.content.Context
 import android.util.Log
 import com.google.android.gms.wearable.CapabilityClient

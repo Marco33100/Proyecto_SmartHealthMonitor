@@ -23,6 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.wearable.capabilities"
+            android:resource="@xml/wear_capabilities" />
+
         <service android:name=".data.models.WearListenerService"
             android:exported="true">
             <intent-filter>

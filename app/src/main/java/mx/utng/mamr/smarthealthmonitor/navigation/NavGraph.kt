@@ -32,13 +32,17 @@ fun SmartHealthNavGraph() {
         startDestination = Screen.Login.route
     ) {
 
-        // Pantalla de Login
-        composable(Screen.Historial.route) {
-            HistorialScreen(  // ← ya no es PantallaEnConstruccion
-                onBack = { navController.popBackStack() }
+        composable(Screen.Login.route) {
+            LoginScreen(
+                onLoginSuccess = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Login.route) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
-
 
         // Pantalla Dashboard
         composable(Screen.Dashboard.route) {
@@ -52,13 +56,10 @@ fun SmartHealthNavGraph() {
             )
         }
 
-        // Pantalla Historial temporal
+        // Pantalla de Login
         composable(Screen.Historial.route) {
-            PantallaEnConstruccion(
-                titulo = "Historial completo",
-                onBack = {
-                    navController.popBackStack()
-                }
+            HistorialScreen(  // ← ya no es PantallaEnConstruccion
+                onBack = { navController.popBackStack() }
             )
         }
 
