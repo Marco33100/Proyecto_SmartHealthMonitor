@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mx.utng.mamr.smarthealthmonitor.LoginScreen
+import mx.utng.mamr.smarthealthmonitor.ui.screens.AlertaScreen
 import mx.utng.mamr.smarthealthmonitor.ui.screens.DashboardScreen
 import mx.utng.mamr.smarthealthmonitor.ui.screens.HistorialScreen
 import mx.utng.mamr.smarthealthmonitor.ui.theme.SmartHealthMonitorTheme
