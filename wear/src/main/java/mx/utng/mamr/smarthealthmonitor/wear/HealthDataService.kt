@@ -1,4 +1,7 @@
+package mx.utng.mamr.smarthealthmonitor.wear
+
 import android.content.Context
+import android.util.Log
 import androidx.health.services.client.HealthServices
 import androidx.health.services.client.PassiveListenerService
 import androidx.health.services.client.data.*
@@ -19,10 +22,12 @@ class HealthDataService : PassiveListenerService() {
 
     override fun onNewDataPointsReceived(dataPoints: DataPointContainer) {
         val fcDataPoints = dataPoints.getData(DataType.HEART_RATE_BPM)
+        Log.d("HealthDataService", "¡DATOS DETECTADOS! Cantidad: ${fcDataPoints.size}")
 
         fcDataPoints.forEach { dataPoint ->
             if (dataPoint is SampleDataPoint<Double>) {
                 val bpm = dataPoint.value.toInt()
+                Log.d("HealthDataService", "Sensor detectó pulso: $bpm bpm. Enviando al teléfono...")
                 scope.launch { wearDataSender.enviarFC(bpm) }
             }
         }

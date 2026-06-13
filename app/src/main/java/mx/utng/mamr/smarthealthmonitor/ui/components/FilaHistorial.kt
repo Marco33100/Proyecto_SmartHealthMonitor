@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import mx.utng.mamr.smarthealthmonitor.data.models.LecturaFC
+import mx.utng.mamr.smarthealthmonitor.data.db.LecturaFC
 import mx.utng.mamr.smarthealthmonitor.ui.theme.SmartHealthMonitorTheme
 
 @Composable

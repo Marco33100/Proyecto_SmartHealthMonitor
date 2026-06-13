@@ -25,7 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import mx.utng.mamr.smarthealthmonitor.data.models.LecturaFC
+import mx.utng.mamr.smarthealthmonitor.data.db.LecturaFC
 import mx.utng.mamr.smarthealthmonitor.data.models.MockData
 import mx.utng.mamr.smarthealthmonitor.ui.components.FilaHistorial
 import mx.utng.mamr.smarthealthmonitor.ui.components.TarjetaDato
@@ -45,7 +45,7 @@ fun DashboardScreen(
     // collectAsState() convierte StateFlow en State de Compose
     val fc     by viewModel.fc.collectAsState()
     val pasos  by viewModel.pasos.collectAsState()
-    val historial = viewModel.historial
+    val historial by viewModel.historial.collectAsState()
 
     SmartHealthMonitorTheme {
         Scaffold(
