@@ -52,7 +52,7 @@ class WearMainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SmartHealthWearTheme {
+            SmartHealthMonitorTheme {
                 // TODO Ej.02: reemplazar con WearNavGraph
                 WearDashboardScreen()
             }
