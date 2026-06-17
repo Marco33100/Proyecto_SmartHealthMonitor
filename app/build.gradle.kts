@@ -61,6 +61,7 @@ dependencies {
     // Necesario para generar el código del DAO
     ksp("androidx.room:room-compiler:$roomVersion")
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(project(":shared"))
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

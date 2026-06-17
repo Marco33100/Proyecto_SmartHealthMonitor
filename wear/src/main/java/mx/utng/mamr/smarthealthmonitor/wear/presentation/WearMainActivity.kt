@@ -38,6 +38,7 @@ import kotlinx.coroutines.launch
 import mx.utng.mamr.smarthealthmonitor.wear.HealthDataService
 import mx.utng.mamr.smarthealthmonitor.wear.R
 import mx.utng.mamr.smarthealthmonitor.wear.presentation.theme.SmartHealthMonitorTheme
+import androidx.activity.compose.setContent
 
 class WearMainActivity : ComponentActivity() {
 
@@ -49,9 +50,12 @@ class WearMainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         setContent {
-            WearApp("Android")
+            SmartHealthMonitorTheme {
+                // TODO Ej.02: reemplazar con WearNavGraph
+                SmartHealthWearNavGraph()
+            }
         }
     }
 

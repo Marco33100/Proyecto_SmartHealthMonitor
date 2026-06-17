@@ -13,4 +13,3 @@ data class LecturaFC(
         .format(java.util.Date()),
     val esNormal: Boolean = valorBpm in 60..100
 )
-
