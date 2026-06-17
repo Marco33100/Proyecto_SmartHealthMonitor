@@ -49,6 +49,20 @@ fun WearDashboardScreen(
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+            // NUEVO Item: Botón para simular medición
+            item {
+                val context = androidx.compose.ui.platform.LocalContext.current
+                Chip(
+                    label = { Text("💓 MEDIR PULSO") },
+                    onClick = {
+                        val nuevoBpm = (60..140).random()
+                        mx.utng.mamr.smarthealthmonitor.data.models.SmartHealthRepository.actualizarFC(nuevoBpm)
+                        android.widget.Toast.makeText(context, "Medición: $nuevoBpm bpm", android.widget.Toast.LENGTH_SHORT).show()
+                    },
+                    colors = ChipDefaults.primaryChipColors(),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
             // Item 2: Chip de Alerta
             item {
                 Chip(

@@ -44,22 +44,21 @@
         </service>
 
         <service
-            android:name=".watchface.SmartHealthWatchFaceService"
+            android:name="mx.utng.mamr.smarthealthmonitor.wear.watchface.SmartHealthWatchFaceService"
             android:exported="true"
             android:label="SmartHealth Watch Face"
-            android:permission="android.permission.BIND_WALLPAPER">
+            android:permission="android.permission.BIND_WALLPAPER"
+            android:directBootAware="true">
             <meta-data
                 android:name="android.service.wallpaper"
                 android:resource="@xml/watch_face" />
             <meta-data
-                android:name=
-                    "com.google.android.wearable.watchface.preview"
+                android:name="com.google.android.wearable.watchface.preview"
                 android:resource="@mipmap/ic_launcher" />
             <intent-filter>
-                <action android:name=
-                    "android.service.wallpaper.WallpaperService" />
-                <category android:name=
-                    "com.google.android.wearable.watchface.category.WATCH_FACE" />
+                <action android:name="android.service.wallpaper.WallpaperService" />
+                <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
