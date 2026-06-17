@@ -28,6 +28,7 @@ class HealthDataService : PassiveListenerService() {
             if (dataPoint is SampleDataPoint<Double>) {
                 val bpm = dataPoint.value.toInt()
                 Log.d("HealthDataService", "Sensor detectó pulso: $bpm bpm. Enviando al teléfono...")
+                mx.utng.mamr.smarthealthmonitor.data.models.SmartHealthRepository.actualizarFC(bpm)
                 scope.launch { wearDataSender.enviarFC(bpm) }
             }
         }
