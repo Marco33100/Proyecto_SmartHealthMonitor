@@ -69,6 +69,9 @@ dependencies {
     implementation("com.google.android.horologist:horologist-compose-material:0.6.17")
     // Compartir Repository con el módulo shared
     implementation(project(":shared"))
+    implementation("androidx.wear.watchface:watchface:1.2.1")
+    implementation("androidx.wear.watchface:watchface-complications-rendering:1.2.1")
+    implementation("androidx.wear.watchface:watchface-style:1.2.1")
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
