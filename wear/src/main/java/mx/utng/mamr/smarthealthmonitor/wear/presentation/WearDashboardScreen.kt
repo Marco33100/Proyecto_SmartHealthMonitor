@@ -23,6 +23,7 @@ import mx.utng.mamr.smarthealthmonitor.wear.presentation.components.WearFCCard
 @Composable
 fun WearDashboardScreen(
     onAlertClick: () -> Unit = {},
+    onHistorialClick: () -> Unit = {},
     viewModel: WearDashboardViewModel = viewModel()
 ) {
     val fc by viewModel.fc.collectAsState()
@@ -56,6 +57,14 @@ fun WearDashboardScreen(
                     colors = ChipDefaults.primaryChipColors(
                         backgroundColor = MaterialTheme.colorScheme.error
                     ),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+            // Item 3: Chip de Historial
+            item {
+                Chip(
+                    label = { Text("Historial") },
+                    onClick = onHistorialClick,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
