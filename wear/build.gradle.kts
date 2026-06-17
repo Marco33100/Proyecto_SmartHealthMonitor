@@ -62,11 +62,13 @@ dependencies {
     implementation("androidx.wear.compose:compose-material:1.3.1")
     implementation("androidx.wear.compose:compose-foundation:1.3.1")
     implementation("androidx.wear.compose:compose-navigation:1.3.1")
+    // Iconos adicionales
+    implementation("androidx.compose.material:material-icons-extended:1.7.2")
     // Horologist (utilidades Wear OS de Google)
     implementation("com.google.android.horologist:horologist-compose-layout:0.6.17")
     implementation("com.google.android.horologist:horologist-compose-material:0.6.17")
-    // Compartir Repository con el módulo app
-    implementation(project(":app"))
+    // Compartir Repository con el módulo shared
+    implementation(project(":shared"))
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)

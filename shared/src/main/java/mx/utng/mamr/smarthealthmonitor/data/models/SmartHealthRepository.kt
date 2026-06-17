@@ -1,6 +1,5 @@
 package mx.utng.mamr.smarthealthmonitor.data.models
 
-import android.app.Application
 import android.content.Context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +16,6 @@ import mx.utng.mamr.smarthealthmonitor.data.db.SmartHealthDB
 
 /**
  * Repositorio singleton que centraliza los datos de salud.
- * El WearListenerService escribe aquí.
- * El ViewModel lee de aquí.
  */
 object SmartHealthRepository {
     private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
@@ -50,12 +47,4 @@ object SmartHealthRepository {
     // Flow del historial desde Room
     fun obtenerHistorial(): Flow<List<LecturaFC>> =
         dao?.obtenerUltimas() ?: emptyFlow()
-}
-
-// En Application.kt (crear si no existe):
-class SmartHealthApp : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        SmartHealthRepository.init(this)  // inicializar Room
-    }
 }
