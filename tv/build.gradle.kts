@@ -42,6 +42,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     
+    // Room Runtime (necesario para acceder a las clases de DB desde tv)
+    val roomVersion = "2.8.4"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    
     // Core libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

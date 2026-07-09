@@ -15,6 +15,14 @@ class TvViewModel : ViewModel() {
             0
         )
 
+    // Pasos actuales del wearable (o 0 si no hay dato)
+    val pasos: StateFlow<Int> = SmartHealthRepository.pasosFlow
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5_000),
+            0
+        )
+
     // Historial de lecturas desde Room DAO
     val historial: StateFlow<List<LecturaFC>> = SmartHealthRepository.obtenerHistorial()
         .stateIn(

@@ -16,6 +16,9 @@ interface LecturaFCDao {
         LIMIT 50""")  // últimas 50 lecturas
     fun obtenerUltimas(): Flow<List<LecturaFC>>
 
+    @Query("SELECT * FROM lecturas_fc WHERE id = :id LIMIT 1")
+    suspend fun obtenerPorId(id: Int): LecturaFC?
+
     @Query("SELECT COUNT(*) FROM lecturas_fc")
     suspend fun contarRegistros(): Int
 
