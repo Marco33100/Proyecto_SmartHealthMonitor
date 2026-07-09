@@ -76,8 +76,15 @@ class DetailFragment : DetailsSupportFragment(), OnActionClickedListener {
     override fun onActionClicked(action: Action) {
         when (action.id) {
             ACTION_PLAY -> {
-                // TODO Ej.02: navegar al PlaybackFragment
-                Toast.makeText(context, "Reproducir", Toast.LENGTH_SHORT).show()
+                val playback = PlaybackFragment.newInstance(
+                    url = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                    title = "Alerta FC ${lectura?.valorBpm ?: 0} bpm",
+                    lecturaId = lectura?.id ?: 0
+                )
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_browse_fragment, playback)
+                    .addToBackStack(null)
+                    .commit()
             }
             ACTION_BACK -> {
                 requireActivity().onBackPressedDispatcher.onBackPressed()

@@ -22,6 +22,9 @@ interface LecturaFCDao {
     @Query("SELECT COUNT(*) FROM lecturas_fc")
     suspend fun contarRegistros(): Int
 
+    @Query("UPDATE lecturas_fc SET duracionSegundos = :duracion WHERE id = :id")
+    suspend fun actualizarDuracion(id: Int, duracion: Int)
+
     // Limpiar lecturas más antiguas de 7 días
     @Query("""
         DELETE FROM lecturas_fc
