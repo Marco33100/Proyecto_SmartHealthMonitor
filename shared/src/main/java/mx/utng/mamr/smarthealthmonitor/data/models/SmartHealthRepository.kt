@@ -30,6 +30,13 @@ object SmartHealthRepository {
 
     fun init(context: Context) {
         dao = SmartHealthDB.getDatabase(context).lecturaDao()
+        repositoryScope.launch(Dispatchers.IO) {
+            if (dao?.contarRegistros() == 0) {
+                MockData.historialFC.forEach {
+                    dao?.insertar(it.copy(id = 0)) // auto-generate IDs correctly
+                }
+            }
+        }
     }
 
     fun actualizarFC(bpm: Int) {

@@ -42,6 +42,19 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     
+    // Room Runtime (necesario para acceder a las clases de DB desde tv)
+    val roomVersion = "2.8.4"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    
+    // Media3 + ExoPlayer
+    val media3Version = "1.4.1"
+    implementation("androidx.media3:media3-exoplayer:$media3Version")
+    implementation("androidx.media3:media3-ui:$media3Version")
+    implementation("androidx.media3:media3-ui-leanback:$media3Version")
+    // LeanbackPlayerAdapter conecta ExoPlayer con Leanback UI
+    implementation("androidx.leanback:leanback-preference:1.2.0")
+    
     // Core libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
