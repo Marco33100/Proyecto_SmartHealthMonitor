@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -43,6 +44,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.launch
 
+
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.mediarouter.app.MediaRouteButton
+import com.google.android.gms.cast.framework.CastButtonFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,6 +93,17 @@ fun DashboardScreen(
                         Text(
                             text = "SmartHealth",
                             style = MaterialTheme.typography.titleLarge
+                        )
+                    },
+                    actions = {
+                        // CastButton: AndroidView que envuelve MediaRouteButton
+                        AndroidView(
+                            factory = { context ->
+                                MediaRouteButton(context).apply {
+                                    CastButtonFactory.setUpMediaRouteButton(context, this)
+                                }
+                            },
+                            modifier = Modifier.size(48.dp)
                         )
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
