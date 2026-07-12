@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
 import mx.utng.mamr.smarthealthmonitor.data.db.LecturaFC
 import mx.utng.mamr.smarthealthmonitor.data.models.SmartHealthRepository
 import mx.utng.mamr.smarthealthmonitor.mqtt.TvMessage
@@ -17,7 +18,9 @@ class TvViewModel(application: Application) : AndroidViewModel(application) {
     private val mqttSubscriber = MqttTvSubscriber(application, mqttFlow)
 
     init {
-        mqttSubscriber.connect()
+        viewModelScope.launch(Dispatchers.IO) {
+            mqttSubscriber.connect()
+        }
         // Observar mensajes MQTT y actualizar el estado del repositorio local de la TV
         viewModelScope.launch {
             mqttFlow.collect { tvMsg ->
