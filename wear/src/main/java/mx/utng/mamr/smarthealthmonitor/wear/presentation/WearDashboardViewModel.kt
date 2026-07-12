@@ -1,15 +1,37 @@
 package mx.utng.mamr.smarthealthmonitor.wear.presentation
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import mx.utng.mamr.smarthealthmonitor.data.db.LecturaFC
 import mx.utng.mamr.smarthealthmonitor.data.models.SmartHealthRepository
+import mx.utng.mamr.smarthealthmonitor.wear.mqtt.MqttWearPublisher
 
-class WearDashboardViewModel : ViewModel() {
+class WearDashboardViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val mqttPublisher = MqttWearPublisher(application)
+
+    init {
+        mqttPublisher.connect()
+        viewModelScope.launch {
+            SmartHealthRepository.fcFlow.collect { bpm ->
+                if (bpm > 0) {
+                    val estado = when {
+                        bpm < 60 -> "FC Baja"
+                        bpm > 100 -> "FC Alta"
+                        else -> "Normal"
+                    }
+                    mqttPublisher.publishFC(bpm, estado)
+                }
+            }
+        }
+    }
+
     // Definimos fc obteniendo los datos del repositorio
     val fc: StateFlow<Int> = SmartHealthRepository.fcFlow
         .map { if (it == 0) 72 else it } // Valor por defecto si es 0
@@ -26,4 +48,9 @@ class WearDashboardViewModel : ViewModel() {
             SharingStarted.WhileSubscribed(5_000),
             emptyList()
         )
+
+    override fun onCleared() {
+        super.onCleared()
+        mqttPublisher.disconnect()
+    }
 }
