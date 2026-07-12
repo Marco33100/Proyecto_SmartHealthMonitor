@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Database(
     entities = [LecturaFC::class],
-    version  = 2,
+    version  = 3,
     exportSchema = false  // true en producción para migraciones
 )
 abstract class SmartHealthDB : RoomDatabase() {
