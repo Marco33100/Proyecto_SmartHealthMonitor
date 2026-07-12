@@ -99,12 +99,17 @@ fun DashboardScreen(
                         // CastButton: AndroidView que envuelve MediaRouteButton
                         AndroidView(
                             factory = { context ->
-                                MediaRouteButton(context).apply {
-                                    try {
-                                        CastButtonFactory.setUpMediaRouteButton(context, this)
-                                    } catch (e: Exception) {
-                                        android.util.Log.e("CastButton", "Error al inicializar Cast: ${e.message}")
+                                try {
+                                    val themedContext = android.view.ContextThemeWrapper(
+                                        context,
+                                        android.R.style.Theme_DeviceDefault
+                                    )
+                                    MediaRouteButton(themedContext).apply {
+                                        CastButtonFactory.setUpMediaRouteButton(themedContext, this)
                                     }
+                                } catch (e: Exception) {
+                                    android.util.Log.e("CastButton", "Error al instanciar MediaRouteButton: ${e.message}")
+                                    android.view.View(context)
                                 }
                             },
                             modifier = Modifier.size(48.dp)
