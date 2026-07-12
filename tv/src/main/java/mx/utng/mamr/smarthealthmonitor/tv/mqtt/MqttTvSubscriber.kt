@@ -52,7 +52,7 @@ class MqttTvSubscriber(
                     android.util.Log.d("MQTT_TV", "✅ TV suscrita a ${MqttConfig.TOPIC_TV}")
                 }
                 override fun onFailure(token: IMqttToken?, ex: Throwable?) {
-                    android.util.Log.e("MQTT_TV", "❌ Error: ${ex?.message}")
+                    android.util.Log.e("MQTT_TV", "❌ Error detallado", ex)
                 }
             })
         } catch (e: Exception) {

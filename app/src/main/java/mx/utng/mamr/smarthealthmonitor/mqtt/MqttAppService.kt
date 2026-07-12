@@ -20,6 +20,7 @@ class MqttAppService(
 
     fun connect() {
         try {
+            android.util.Log.d("MQTT_APP", "Intentando conectar al Broker: ${MqttConfig.BROKER_URL} | Usuario: '${MqttConfig.USERNAME}' | Clave: '${MqttConfig.PASSWORD}'")
             client = MqttAsyncClient(
                 MqttConfig.BROKER_URL,
                 MqttConfig.CLIENT_APP, 
@@ -81,6 +82,27 @@ class MqttAppService(
             android.util.Log.d("MQTT_APP","   Re-publicado al TV: ${fcMsg.bpm} bpm")
         } catch (e: Exception) {
             android.util.Log.e("MQTT_APP", "❌ Error al procesar mensaje FC: ${e.message}")
+        }
+    }
+
+    fun publishFcToTv(bpm: Int, estado: String) {
+        try {
+            val hora = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+            val tvMsg = TvMessage(bpm = bpm, estado = estado, hora = hora)
+            val tvPayload = Json.encodeToString(tvMsg).toByteArray()
+            
+            val tvMqtt = MqttMessage(tvPayload).apply {
+                qos = MqttConfig.QOS
+                isRetained = true
+            }
+            if (client?.isConnected == true) {
+                client?.publish(MqttConfig.TOPIC_TV, tvMqtt)
+                android.util.Log.d("MQTT_APP","   Puenteado al TV: $bpm bpm")
+            } else {
+                android.util.Log.w("MQTT_APP","   No se pudo puentear al TV: Cliente MQTT desconectado")
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("MQTT_APP", "❌ Error al puentear mensaje FC al TV: ${e.message}")
         }
     }
 

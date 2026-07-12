@@ -4,7 +4,7 @@ import mx.utng.mamr.smarthealthmonitor.shared.BuildConfig
 
 object MqttConfig {
     // Datos leídos de forma segura desde local.properties mediante BuildConfig
-    val BROKER_URL = BuildConfig.MQTT_BROKER_URL.ifEmpty { "ssl://7c07f93f35e4454184a3d3991019f8e1.s1.eu.hivemq.cloud:8883" }
+    val BROKER_URL = BuildConfig.MQTT_BROKER_URL.ifEmpty { "ssl://7c07f793f35e454184a3d3991019f8e1.s1.eu.hivemq.cloud:8883" }
     val USERNAME   = BuildConfig.MQTT_USERNAME.ifEmpty { "mamr-smarthealth" }
     val PASSWORD   = BuildConfig.MQTT_PASSWORD.ifEmpty { "mamr12345" }
 

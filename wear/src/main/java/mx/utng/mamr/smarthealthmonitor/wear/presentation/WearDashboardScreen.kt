@@ -56,7 +56,7 @@ fun WearDashboardScreen(
                     label = { Text("💓 MEDIR PULSO") },
                     onClick = {
                         val nuevoBpm = (60..140).random()
-                        mx.utng.mamr.smarthealthmonitor.data.models.SmartHealthRepository.actualizarFC(nuevoBpm)
+                        viewModel.simularMedicion(nuevoBpm)
                         android.widget.Toast.makeText(context, "Medición: $nuevoBpm bpm", android.widget.Toast.LENGTH_SHORT).show()
                     },
                     colors = ChipDefaults.primaryChipColors(),

@@ -11,10 +11,12 @@ import kotlinx.coroutines.launch
 import mx.utng.mamr.smarthealthmonitor.data.db.LecturaFC
 import mx.utng.mamr.smarthealthmonitor.data.models.SmartHealthRepository
 import mx.utng.mamr.smarthealthmonitor.wear.mqtt.MqttWearPublisher
+import mx.utng.mamr.smarthealthmonitor.wear.WearDataSender
 
 class WearDashboardViewModel(application: Application) : AndroidViewModel(application) {
 
     private val mqttPublisher = MqttWearPublisher(application)
+    private val wearDataSender = WearDataSender(application)
 
     init {
         viewModelScope.launch(kotlinx.coroutines.Dispatchers.IO) {
@@ -50,6 +52,18 @@ class WearDashboardViewModel(application: Application) : AndroidViewModel(applic
             SharingStarted.WhileSubscribed(5_000),
             emptyList()
         )
+
+    fun simularMedicion(bpm: Int) {
+        viewModelScope.launch {
+            SmartHealthRepository.actualizarFC(bpm)
+            try {
+                wearDataSender.enviarFC(bpm)
+                android.util.Log.d("WearVM", "Simulado: $bpm bpm enviado al teléfono")
+            } catch (e: Exception) {
+                android.util.Log.e("WearVM", "Error al enviar simulación: ${e.message}")
+            }
+        }
+    }
 
     override fun onCleared() {
         super.onCleared()

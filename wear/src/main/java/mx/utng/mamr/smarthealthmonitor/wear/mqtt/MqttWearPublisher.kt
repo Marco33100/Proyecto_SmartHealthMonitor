@@ -33,7 +33,7 @@ class MqttWearPublisher(private val context: Context) {
                 }
 
                 override fun onFailure(token: IMqttToken?, ex: Throwable?) {
-                    android.util.Log.e("MQTT_WEAR", "❌ Error: ${ex?.message}")
+                    android.util.Log.e("MQTT_WEAR", "❌ Error detallado", ex)
                 }
             })
         } catch (e: Exception) {
