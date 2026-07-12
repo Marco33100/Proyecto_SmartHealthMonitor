@@ -35,10 +35,10 @@ class FCCardPresenter : Presenter() {
         
         when (item) {
             is LecturaFC -> {
-                card.titleText = "${item.valorBpm} bpm"
+                card.titleText = "${item.bpm} bpm"
                 card.contentText = item.hora
                 // Color de fondo según si FC es normal
-                val bgColor = if (item.esNormal) {
+                val bgColor = if (item.estado == "Normal") {
                     Color.parseColor("#1B4F8A") // primary
                 } else {
                     Color.parseColor("#B3261E") // error

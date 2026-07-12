@@ -54,7 +54,7 @@ class DetailFragment : DetailsSupportFragment(), OnActionClickedListener {
         val row = DetailsOverviewRow(lectura)
         
         // Ícono de corazón como imagen del detalle
-        val iconRes = if (lectura.esNormal)
+        val iconRes = if (lectura.estado == "Normal")
             android.R.drawable.ic_menu_compass // placeholder OK
         else
             android.R.drawable.ic_dialog_alert // placeholder error
@@ -78,7 +78,7 @@ class DetailFragment : DetailsSupportFragment(), OnActionClickedListener {
             ACTION_PLAY -> {
                 val playback = PlaybackFragment.newInstance(
                     url = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                    title = "Alerta FC ${lectura?.valorBpm ?: 0} bpm",
+                    title = "Alerta FC ${lectura?.bpm ?: 0} bpm",
                     lecturaId = lectura?.id ?: 0
                 )
                 parentFragmentManager.beginTransaction()
@@ -93,10 +93,10 @@ class DetailFragment : DetailsSupportFragment(), OnActionClickedListener {
                 // Reto adicional: Mostrar Toast con los últimos 5 valores de FC ordenados cronológicamente
                 viewLifecycleOwner.lifecycleScope.launch {
                     val db = SmartHealthDB.getDatabase(requireContext())
-                    val flowList = db.lecturaDao().obtenerUltimas()
+                    val flowList = db.lecturaDao().obtenerTodas()
                     val totalList = flowList.first()
                     val ultimos5 = totalList.take(5).reversed()
-                    val texto = ultimos5.joinToString(", ") { "${it.valorBpm} bpm" }
+                    val texto = ultimos5.joinToString(", ") { "${it.bpm} bpm" }
                     Toast.makeText(context, "Tendencia: $texto", Toast.LENGTH_LONG).show()
                 }
             }
