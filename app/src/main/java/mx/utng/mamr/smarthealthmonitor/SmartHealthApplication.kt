@@ -19,5 +19,8 @@ class SmartHealthApplication : SmartHealthApp() {
         applicationScope.launch {
             mqttService.connect()
         }
+
+        // Programar sincronización periódica con Neon Serverless
+        mx.utng.mamr.smarthealthmonitor.data.sync.NeonSyncWorker.schedule(this)
     }
 }
