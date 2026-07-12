@@ -19,6 +19,9 @@ interface LecturaFCDao {
     @Query("SELECT COUNT(*) FROM lecturas_fc")
     suspend fun contarRegistros(): Int
 
+    @Query("UPDATE lecturas_fc SET duracionSegundos = :duracion WHERE id = :id")
+    suspend fun actualizarDuracion(id: Int, duracion: Int)
+
     // ── Nuevos para sync ───────────────────────────────────
     /** Upsert: inserta o reemplaza si el id ya existe */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
