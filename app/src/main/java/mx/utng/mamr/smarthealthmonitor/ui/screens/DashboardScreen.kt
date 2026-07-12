@@ -100,7 +100,11 @@ fun DashboardScreen(
                         AndroidView(
                             factory = { context ->
                                 MediaRouteButton(context).apply {
-                                    CastButtonFactory.setUpMediaRouteButton(context, this)
+                                    try {
+                                        CastButtonFactory.setUpMediaRouteButton(context, this)
+                                    } catch (e: Exception) {
+                                        android.util.Log.e("CastButton", "Error al inicializar Cast: ${e.message}")
+                                    }
                                 }
                             },
                             modifier = Modifier.size(48.dp)

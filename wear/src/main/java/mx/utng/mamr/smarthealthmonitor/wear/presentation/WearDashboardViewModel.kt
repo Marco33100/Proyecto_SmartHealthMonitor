@@ -17,7 +17,9 @@ class WearDashboardViewModel(application: Application) : AndroidViewModel(applic
     private val mqttPublisher = MqttWearPublisher(application)
 
     init {
-        mqttPublisher.connect()
+        viewModelScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            mqttPublisher.connect()
+        }
         viewModelScope.launch {
             SmartHealthRepository.fcFlow.collect { bpm ->
                 if (bpm > 0) {

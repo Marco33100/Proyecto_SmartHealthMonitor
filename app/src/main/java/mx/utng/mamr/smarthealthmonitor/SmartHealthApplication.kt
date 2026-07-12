@@ -1,16 +1,23 @@
 package mx.utng.mamr.smarthealthmonitor
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import mx.utng.mamr.smarthealthmonitor.mqtt.MqttAppService
 
 class SmartHealthApplication : SmartHealthApp() {
     
     lateinit var mqttService: MqttAppService
+    private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     override fun onCreate() {
         super.onCreate()
         
         // Inicializar el servicio de MQTT del teléfono
         mqttService = MqttAppService(context = this)
-        mqttService.connect()
+        applicationScope.launch {
+            mqttService.connect()
+        }
     }
 }
