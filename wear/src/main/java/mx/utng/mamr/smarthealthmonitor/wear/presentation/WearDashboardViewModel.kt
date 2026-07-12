@@ -17,6 +17,7 @@ class WearDashboardViewModel(application: Application) : AndroidViewModel(applic
 
     private val mqttPublisher = MqttWearPublisher(application)
     private val wearDataSender = WearDataSender(application)
+    private val neonRepo = mx.utng.mamr.smarthealthmonitor.wear.data.WearNeonRepository()
 
     init {
         viewModelScope.launch(kotlinx.coroutines.Dispatchers.IO) {
@@ -31,6 +32,12 @@ class WearDashboardViewModel(application: Application) : AndroidViewModel(applic
                         else -> "Normal"
                     }
                     mqttPublisher.publishFC(bpm, estado)
+                    
+                    // Publicar a Neon en IO thread
+                    launch(kotlinx.coroutines.Dispatchers.IO) {
+                        runCatching { neonRepo.publicarLectura(bpm, estado) }
+                            .onFailure { android.util.Log.w("WEAR", "Sin red: ${it.message}") }
+                    }
                 }
             }
         }
