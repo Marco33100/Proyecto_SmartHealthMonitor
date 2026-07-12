@@ -1,14 +1,11 @@
 package mx.utng.mamr.smarthealthmonitor.data.remote
 
-import kotlinx.serialization.Serializable
 import retrofit2.http.*
 
 /** Request genérico para la Neon HTTP API */
-@Serializable
 data class NeonRequest(val query: String, val params: List<Any> = emptyList())
 
 /** Response de la Neon HTTP API */
-@Serializable
 data class NeonResponse<T>(
     val rows : List<T> = emptyList(),
     val rowCount : Int = 0,
@@ -16,7 +13,6 @@ data class NeonResponse<T>(
 )
 
 /** DTO de lectura FC (mapea fila de PostgreSQL) */
-@Serializable
 data class LecturaFcDto(
     val id : Int = 0,
     val bpm : Int,
