@@ -43,7 +43,12 @@ object SmartHealthRepository {
         _fcFlow.value = bpm
         // Persistir en Room automáticamente en segundo plano
         repositoryScope.launch(Dispatchers.IO) {
-            dao?.insertar(LecturaFC(valorBpm = bpm))
+            val estado = when {
+                bpm < 60 -> "FC Baja"
+                bpm > 100 -> "FC Alta"
+                else -> "Normal"
+            }
+            dao?.insertar(LecturaFC(bpm = bpm, estado = estado, dispositivo = "app"))
         }
     }
 
@@ -53,5 +58,5 @@ object SmartHealthRepository {
 
     // Flow del historial desde Room
     fun obtenerHistorial(): Flow<List<LecturaFC>> =
-        dao?.obtenerUltimas() ?: emptyFlow()
+        dao?.obtenerTodas() ?: emptyFlow()
 }
