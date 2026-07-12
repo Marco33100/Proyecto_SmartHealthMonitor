@@ -50,6 +50,20 @@ class NeonSyncWorker(
                 ExistingPeriodicWorkPolicy.KEEP,
                 request
             )
+            
+            // También disparar un sync inmediato al arranque
+            syncNow(context)
+        }
+        
+        /** Disparar sync inmediato (one-shot) */
+        fun syncNow(context: Context) {
+            val request = OneTimeWorkRequestBuilder<NeonSyncWorker>()
+                .setConstraints(
+                    Constraints.Builder()
+                        .setRequiredNetworkType(NetworkType.CONNECTED)
+                        .build()
+                ).build()
+            WorkManager.getInstance(context).enqueue(request)
         }
     }
 }

@@ -27,8 +27,6 @@ data class LecturaFcDto(
 interface NeonApiService {
     @POST("sql")
     suspend fun executeQuery(
-        @Header("Authorization") auth: String,
-        @Header("Neon-Connection-String") connStr: String,
         @Body request: NeonRequest
     ): NeonResponse<LecturaFcDto>
 }
