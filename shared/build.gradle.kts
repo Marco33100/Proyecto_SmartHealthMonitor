@@ -23,6 +23,11 @@ android {
         buildConfigField("String", "MQTT_BROKER_URL", "\"${properties.getProperty("mqtt.broker_url") ?: ""}\"")
         buildConfigField("String", "MQTT_USERNAME", "\"${properties.getProperty("mqtt.username") ?: ""}\"")
         buildConfigField("String", "MQTT_PASSWORD", "\"${properties.getProperty("mqtt.password") ?: ""}\"")
+        buildConfigField("String", "NEON_API_KEY", "\"${properties.getProperty("NEON_API_KEY") ?: ""}\"")
+        buildConfigField("String", "NEON_HOST", "\"${properties.getProperty("NEON_HOST") ?: ""}\"")
+        buildConfigField("String", "NEON_DB", "\"${properties.getProperty("NEON_DB") ?: ""}\"")
+        buildConfigField("String", "NEON_USER", "\"${properties.getProperty("NEON_USER") ?: ""}\"")
+        buildConfigField("String", "NEON_PASSWORD", "\"${properties.getProperty("NEON_PASSWORD") ?: ""}\"")
     }
 
     compileOptions {
@@ -48,4 +53,10 @@ dependencies {
 
     // Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    
+    // Retrofit + OkHttp para llamadas a Neon HTTP API
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }

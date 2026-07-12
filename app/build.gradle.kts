@@ -64,6 +64,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(project(":shared"))
     
+    // WorkManager para sync periódico en background
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
+    
     // Cast SDK
     implementation("androidx.mediarouter:mediarouter:1.7.0")
     implementation("com.google.android.gms:play-services-cast-framework:21.5.0")
